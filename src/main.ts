@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
 import { Transport } from '@nestjs/microservices';
+import { join } from 'path';
 
 
 // create a logger instance
@@ -9,10 +10,10 @@ const logger = new Logger('Main');
 
 // create the microservice options object
 const microserviceOptions = {
-  transport: Transport.TCP,
+  transport: Transport.GRPC,
   options: {
-    host: '127.0.0.1',
-    port: 8877,
+    package: 'app',
+    protoPath: join(__dirname, '../src/app.proto'),
   },
 };
 
